@@ -1,0 +1,12 @@
+com\ToDoList\repository\TaskRepository.class
+com\ToDoList\mapper\TaskMapper.class
+com\ToDoList\model\BaseEntity.class
+com\ToDoList\model\Task$TaskBuilder.class
+com\ToDoList\Controller\TaskController.class
+com\ToDoList\model\Task.class
+com\ToDoList\exception\TaskNotFoundException.class
+com\ToDoList\dto\TaskDto.class
+com\ToDoList\enums\Status.class
+com\ToDoList\service\TaskService.class
+com\ToDoList\ToDoListApplication.class
+com\ToDoList\Controller\GlobalExceptionHandler.class

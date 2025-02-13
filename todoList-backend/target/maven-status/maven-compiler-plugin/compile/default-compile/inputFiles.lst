@@ -1,0 +1,11 @@
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\Controller\GlobalExceptionHandler.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\Controller\TaskController.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\dto\TaskDto.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\enums\Status.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\exception\TaskNotFoundException.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\mapper\TaskMapper.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\model\BaseEntity.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\model\Task.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\repository\TaskRepository.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\service\TaskService.java
+C:\Users\i\Desktop\ToDoList\src\main\java\com\ToDoList\ToDoListApplication.java
