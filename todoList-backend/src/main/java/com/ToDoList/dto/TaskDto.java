@@ -1,11 +1,7 @@
 package com.ToDoList.dto;
 
 import com.ToDoList.enums.Status;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
 public class TaskDto {
 
     private String title;

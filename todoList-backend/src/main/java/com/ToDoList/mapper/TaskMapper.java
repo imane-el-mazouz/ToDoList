@@ -7,18 +7,18 @@ import com.ToDoList.enums.Status;
 public class TaskMapper {
 
     public static Task toEntity(TaskDto dto) {
-        return Task.builder()
-                .title(dto.getTitle())
-                .description(dto.getDescription())
-                .status(dto.getStatus() != null ? dto.getStatus() : Status.PENDING)
-                .build();
+        Task task = new Task();
+        task.setTitle(dto.getTitle());
+        task.setDescription(dto.getDescription());
+        task.setStatus(dto.getStatus() != null ? dto.getStatus() : Status.PENDING);
+        return task;
     }
 
     public static TaskDto toDto(Task task) {
-        TaskDto dto = new TaskDto();
-        dto.setTitle(task.getTitle());
-        dto.setDescription(task.getDescription());
-        dto.setStatus(task.getStatus());
-        return dto;
+        return new TaskDto(
+                task.getTitle(),
+                task.getDescription(),
+                task.getStatus()
+        );
     }
 }
