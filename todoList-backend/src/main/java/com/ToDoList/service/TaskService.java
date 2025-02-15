@@ -26,21 +26,18 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    // Changement de Long à UUID
     public TaskDto getTaskById(UUID id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
         return TaskMapper.toDto(task);
     }
 
-    // Changement de Long à UUID
     public TaskDto createTask(TaskDto taskDto) {
         Task task = TaskMapper.toEntity(taskDto);
         taskRepository.save(task);
         return TaskMapper.toDto(task);
     }
 
-    // Changement de Long à UUID
     public TaskDto updateTask(UUID id, @org.jetbrains.annotations.NotNull TaskDto updatedTaskDto) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
@@ -52,7 +49,6 @@ public class TaskService {
         return TaskMapper.toDto(task);
     }
 
-    // Changement de Long à UUID
     public void deleteTask(UUID id) {
         if (!taskRepository.existsById(id)) {
             throw new TaskNotFoundException(id);
