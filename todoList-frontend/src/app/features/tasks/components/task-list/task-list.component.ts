@@ -3,6 +3,7 @@ import {Task} from "../../models/task";
 import {TaskService} from "../../services/task.service";
 import {FormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-task-list',
@@ -10,7 +11,7 @@ import {NgForOf, NgIf} from "@angular/common";
   imports: [
     FormsModule,
     NgForOf,
-    NgIf
+    NgIf,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'

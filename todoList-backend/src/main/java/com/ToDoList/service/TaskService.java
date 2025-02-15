@@ -1,6 +1,7 @@
 package com.ToDoList.service;
 
 import com.ToDoList.dto.TaskDto;
+import com.ToDoList.enums.Status;
 import com.ToDoList.exception.TaskNotFoundException;
 import com.ToDoList.mapper.TaskMapper;
 import com.ToDoList.model.Task;
@@ -54,5 +55,15 @@ public class TaskService {
             throw new TaskNotFoundException(id);
         }
         taskRepository.deleteById(id);
+    }
+
+    public TaskDto markTaskAsCompleted(UUID id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskNotFoundException(id));
+
+        task.setStatus(Status.COMPLETED);
+        taskRepository.save(task);
+
+        return TaskMapper.toDto(task);
     }
 }

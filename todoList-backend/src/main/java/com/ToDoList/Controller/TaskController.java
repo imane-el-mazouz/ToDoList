@@ -49,4 +49,10 @@ public class TaskController {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<TaskDto> markTaskAsCompleted(@PathVariable UUID id) {
+        return ResponseEntity.ok(taskService.markTaskAsCompleted(id));
+    }
 }
