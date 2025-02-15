@@ -2,8 +2,11 @@ package com.ToDoList.dto;
 
 import com.ToDoList.enums.Status;
 
+import java.util.UUID;
+
 public class TaskDto {
 
+    private UUID id;
     private String title;
     private String description;
     private Status status;
@@ -40,4 +43,18 @@ public class TaskDto {
         this.status = status;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public TaskDto(UUID id, String title, String description, Status status) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
 }

@@ -46,10 +46,10 @@
 //}
 package com.ToDoList.config;
 
+import com.ToDoList.model.CustomOffsetDateTimeDeserializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.gestion.model.CustomOffsetDateTimeDeserializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -62,12 +62,10 @@ public class JacksonConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Enregistrement du module JavaTimeModule pour la gestion des dates/temps
         JavaTimeModule module = new JavaTimeModule();
         module.addDeserializer(OffsetDateTime.class, new CustomOffsetDateTimeDeserializer());
         objectMapper.registerModule(module);
 
-        // Désactivation de FAIL_ON_EMPTY_BEANS pour éviter l'erreur de sérialisation avec des beans vides
         objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
         return objectMapper;

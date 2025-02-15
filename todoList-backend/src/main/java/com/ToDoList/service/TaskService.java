@@ -8,6 +8,7 @@ import com.ToDoList.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,22 +26,24 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    public TaskDto getTaskById(Long id) {
+    // Changement de Long à UUID
+    public TaskDto getTaskById(UUID id) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
         return TaskMapper.toDto(task);
     }
 
+    // Changement de Long à UUID
     public TaskDto createTask(TaskDto taskDto) {
         Task task = TaskMapper.toEntity(taskDto);
         taskRepository.save(task);
         return TaskMapper.toDto(task);
     }
 
-    public TaskDto updateTask(Long id, TaskDto updatedTaskDto) {
+    // Changement de Long à UUID
+    public TaskDto updateTask(UUID id, @org.jetbrains.annotations.NotNull TaskDto updatedTaskDto) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new TaskNotFoundException(id));
-
         task.setTitle(updatedTaskDto.getTitle());
         task.setDescription(updatedTaskDto.getDescription());
         task.setStatus(updatedTaskDto.getStatus());
@@ -49,8 +52,8 @@ public class TaskService {
         return TaskMapper.toDto(task);
     }
 
-
-    public void deleteTask(Long id) {
+    // Changement de Long à UUID
+    public void deleteTask(UUID id) {
         if (!taskRepository.existsById(id)) {
             throw new TaskNotFoundException(id);
         }

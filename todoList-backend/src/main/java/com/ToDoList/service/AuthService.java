@@ -1,6 +1,9 @@
 package com.ToDoList.service;
 
 
+import com.ToDoList.dto.AuthRequestDTO;
+import com.ToDoList.dto.JwtResponseDTO;
+import com.ToDoList.enums.Role;
 import com.ToDoList.model.User;
 import com.ToDoList.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,23 +47,64 @@ public class AuthService implements UserDetailsService {
                 .build();
     }
 
-    public JwtResponseDTO signUp(User userRequest) {
-        if (userRepository.findByEmail(userRequest.getEmail()) != null) {
-            throw new RuntimeException("Email is already taken.");
-        }
-        if (userRequest.getRole() == null) {
-            userRequest.setRole(Role.ADMIN);
-        }
-        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        User savedUser = userRepository.save(userRequest);
-
-        String token = jwtService.generateToken(savedUser.getEmail(), savedUser.getRole());
-
-        return JwtResponseDTO.builder()
-                .accessToken(token)
-                .user(savedUser)
-                .build();
+//    public JwtResponseDTO signUp(User userRequest) {
+//        if (userRepository.findByEmail(userRequest.getEmail()) != null) {
+//            throw new RuntimeException("Email is already taken.");
+//        }
+//        if (userRequest.getRole() == null) {
+//            userRequest.setRole(Role.ADMIN);
+//        }
+//        userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+//        User savedUser = userRepository.save(userRequest);
+//
+//        String token = jwtService.generateToken(savedUser.getEmail(), savedUser.getRole());
+//
+//        return JwtResponseDTO.builder()
+//                .accessToken(token)
+//                .user(savedUser)
+//                .build();
+//    }
+//
+//    public JwtResponseDTO login(AuthRequestDTO authRequestDTO) {
+//        try {
+//            Authentication authentication = authenticationManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword())
+//            );
+//            System.out.println("Authentification réussie : " + authentication.isAuthenticated());
+//
+//            if (authentication.isAuthenticated()) {
+//                User user = userRepository.findByEmail(authRequestDTO.getEmail());
+//                String token = jwtService.generateToken(user.getEmail(), user.getRole());
+//                return JwtResponseDTO.builder()
+//                        .accessToken(token)
+//                        .user(user)
+//                        .build();
+//            } else {
+//                throw new UsernameNotFoundException("Invalid user request.");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw e;
+//        }
+//    }
+public JwtResponseDTO signUp(User userRequest) {
+    if (userRepository.findByEmail(userRequest.getEmail()) != null) {
+        throw new RuntimeException("Email is already taken.");
     }
+    if (userRequest.getRole() == null) {
+        userRequest.setRole(Role.ADMIN);
+    }
+    userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+    User savedUser = userRepository.save(userRequest);
+
+    String token = jwtService.generateToken(savedUser.getEmail(), savedUser.getRole());
+
+    JwtResponseDTO response = new JwtResponseDTO();
+    response.setAccessToken(token);
+    response.setUser(savedUser);
+
+    return response;
+}
 
     public JwtResponseDTO login(AuthRequestDTO authRequestDTO) {
         try {
@@ -72,17 +116,20 @@ public class AuthService implements UserDetailsService {
             if (authentication.isAuthenticated()) {
                 User user = userRepository.findByEmail(authRequestDTO.getEmail());
                 String token = jwtService.generateToken(user.getEmail(), user.getRole());
-                return JwtResponseDTO.builder()
-                        .accessToken(token)
-                        .user(user)
-                        .build();
+
+                JwtResponseDTO response = new JwtResponseDTO();
+                response.setAccessToken(token);
+                response.setUser(user);
+
+                return response;
             } else {
                 throw new UsernameNotFoundException("Invalid user request.");
             }
         } catch (Exception e) {
-            e.printStackTrace();  // Log l'exception pour mieux la comprendre
-            throw e;  // Lancer l'exception après avoir imprimé les logs
+            e.printStackTrace();
+            throw e;
         }
     }
+
 
 }

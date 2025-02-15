@@ -1,9 +1,10 @@
 package com.ToDoList.Controller;
 
-import com.gestion.dto.AuthRequestDTO;
-import com.gestion.dto.JwtResponseDTO;
-import com.gestion.model.User;
-import com.gestion.service.AuthService;
+
+import com.ToDoList.dto.AuthRequestDTO;
+import com.ToDoList.dto.JwtResponseDTO;
+import com.ToDoList.model.User;
+import com.ToDoList.service.AuthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

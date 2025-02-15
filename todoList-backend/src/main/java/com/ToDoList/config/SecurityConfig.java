@@ -1,6 +1,6 @@
 package com.ToDoList.config;
 
-import com.gestion.service.AuthService;
+import com.ToDoList.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,41 +46,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(authorizeRequests ->
           authorizeRequests
                   .requestMatchers("/api/auth/**").permitAll()
-//                  .requestMatchers("/api/**").permitAll()
-                  .requestMatchers("/api/ordre/import-excel").permitAll()
-                  .requestMatchers("/api/affaires").permitAll()
-//                  .requestMatchers("/api/users/**").permitAll()
-                  .requestMatchers("/api/mission/**").permitAll()
-                  .requestMatchers("/api/mission-service/**").permitAll()
-                  .requestMatchers("api/avances/**").permitAll()
-                  .requestMatchers("api/avenants/**").permitAll()
-                  .requestMatchers("api/mandataires/**").permitAll()
-                  .requestMatchers("api/banques/**").permitAll()
-                  .requestMatchers("api/cautions/**").permitAll()
-                  .requestMatchers("api/charges-divers/**").permitAll()
-                  .requestMatchers("api/client/**").permitAll()
-                  .requestMatchers("api/charges/**").permitAll()
-                  .requestMatchers("api/commentaires/**").permitAll()
-                  .requestMatchers("api/division/**").permitAll()
-                  .requestMatchers("api/imputation-jour/**").permitAll()
-                  .requestMatchers("api/export/**").permitAll()
-                  .requestMatchers("api/missions/**").permitAll()
-                  .requestMatchers("api/pays/**").permitAll()
-                  .requestMatchers("api/partenaires/**").permitAll()
-
-                  .requestMatchers("api/pole/**").permitAll()
-                  .requestMatchers("api/soustraitants/**").permitAll()
-                  .requestMatchers("api/userclasses/**").permitAll()
-                  .requestMatchers("api/usergrades/**").permitAll()
-                  .requestMatchers("api/usergrades/**").permitAll()
-                  .requestMatchers("/api/users/user/agents").hasAnyRole("CHEF_DE_PROJET", "CADRE_ADMINISTRATIF", "CHEF_DE_DIVISIONS", "CHEF_DE_POLE", "AGENT")
-                  .requestMatchers("/api/users/by-division/{divisionId}").permitAll()
-                  .requestMatchers("/api/ordre-mission/nextNumero").permitAll()
-                  .requestMatchers("/api/ordre-mission/{id}/export").permitAll()
-                  .requestMatchers("/api/note-de-frais/export/noteDeFrais/{id}").permitAll()
-                  .requestMatchers("/api/note-de-frais/export/noteDeFrais/excel/{id}").permitAll()
-
-                  // ... other configurations
+                  .requestMatchers("/api/tasks").permitAll()
                   .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                   .anyRequest().authenticated()
 

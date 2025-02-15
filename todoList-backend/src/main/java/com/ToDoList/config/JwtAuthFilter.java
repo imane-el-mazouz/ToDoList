@@ -1,8 +1,9 @@
 
 package com.ToDoList.config;
 
-import com.gestion.service.AuthService;
-import com.gestion.service.JwtService;
+
+import com.ToDoList.service.AuthService;
+import com.ToDoList.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;

@@ -15,10 +15,14 @@ public class TaskMapper {
     }
 
     public static TaskDto toDto(Task task) {
-        return new TaskDto(
-                task.getTitle(),
-                task.getDescription(),
-                task.getStatus()
-        );
+        if (task == null) {
+            throw new IllegalArgumentException("Task cannot be null");
+        }
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(task.getId());
+        taskDto.setTitle(task.getTitle());  // Ensure task is not null here
+        taskDto.setDescription(task.getDescription());
+        taskDto.setStatus(task.getStatus());
+        return taskDto;
     }
 }
