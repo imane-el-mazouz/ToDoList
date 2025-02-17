@@ -1,106 +1,23 @@
-<!--<div >-->
-<!--  <button  (click)="showForm = !showForm">-->
-<!--    <i ></i> Ajouter une tâche-->
-<!--  </button>-->
-
-<!--  <div *ngIf="showForm" >-->
-<!--    <h4 >Nouvelle tâche</h4>-->
-<!--    <form (ngSubmit)="addTask()">-->
-<!--      <div >-->
-<!--        <span><i></i></span>-->
-<!--        <input [(ngModel)]="newTask.title" name="title" class="form-control" placeholder="Titre" required />-->
-<!--      </div>-->
-<!--      <div >-->
-<!--        <span ><i ></i></span>-->
-<!--        <input [(ngModel)]="newTask.description" name="description" class="form-control" placeholder="Description" required />-->
-<!--      </div>-->
-<!--      <button type="submit" class="btn btn-success w-100 shadow">Ajouter</button>-->
-<!--    </form>-->
-<!--  </div>-->
-
-<!--  <div class="table-responsive">-->
-<!--    <table class="table table-hover shadow-sm rounded overflow-hidden">-->
-<!--      <thead class="table-primary text-center">-->
-<!--      <tr>-->
-<!--        <th>Titre</th>-->
-<!--        <th>Description</th>-->
-<!--        <th>Statut</th>-->
-<!--        <th>Actions</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr *ngFor="let task of tasks" class="align-middle">-->
-<!--        <td>{{ task.title }}</td>-->
-<!--        <td>{{ task.description }}</td>-->
-<!--        <td>-->
-<!--            <span class="badge px-3 py-2" [ngClass]="{-->
-<!--              'bg-success': task.status === 'COMPLETED',-->
-<!--              'bg-warning': task.status !== 'COMPLETED'-->
-<!--            }">{{ task.status }}</span>-->
-<!--        </td>-->
-<!--        <td class="text-center">-->
-<!--          <button class="btn btn-sm btn-outline-success me-2" (click)="markAsCompleted(task.id!)" *ngIf="task.status !== 'COMPLETED'">-->
-<!--            <i class="bi bi-check-circle"></i>-->
-<!--          </button>-->
-<!--          <button class="btn btn-sm btn-outline-warning me-2" (click)="editTask(task)">-->
-<!--            <i class="bi bi-pencil-square"></i>-->
-<!--          </button>-->
-<!--          <button class="btn btn-sm btn-outline-danger" (click)="deleteTask(task.id!)">-->
-<!--            <i class="bi bi-trash"></i>-->
-<!--          </button>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </div>-->
-
-<!--  <div *ngIf="selectedTask" class="card p-4 mt-4 shadow fade-in">-->
-<!--    <h4 class="text-warning">Modifier la tâche</h4>-->
-<!--    <form (ngSubmit)="updateTask(selectedTask)">-->
-<!--      <div class="mb-3 input-group">-->
-<!--        <span class="input-group-text"><i class="bi bi-pencil"></i></span>-->
-<!--        <input [(ngModel)]="selectedTask.title" name="title" class="form-control" placeholder="Titre" required />-->
-<!--      </div>-->
-<!--      <div class="mb-3 input-group">-->
-<!--        <span class="input-group-text"><i class="bi bi-textarea-t"></i></span>-->
-<!--        <input [(ngModel)]="selectedTask.description" name="description" class="form-control" placeholder="Description" required />-->
-<!--      </div>-->
-<!--      <button type="submit" class="btn btn-primary w-100 shadow">Enregistrer</button>-->
-<!--      <button type="button" class="btn btn-secondary w-100 mt-2 shadow" (click)="selectedTask = null">Annuler</button>-->
-<!--    </form>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<style>-->
-<!--  .fade-in {-->
-<!--    animation: fadeIn 0.5s ease-in-out;-->
-<!--  }-->
-
-<!--  @keyframes fadeIn {-->
-<!--    from { opacity: 0; transform: translateY(-10px); }-->
-<!--    to { opacity: 1; transform: translateY(0); }-->
-<!--  }-->
-<!--</style>-->
-<div>
-  <button (click)="showForm = !showForm">
+<div class="container">
+  <button class="btn btn-primary" (click)="showForm = !showForm">
     Ajouter une tâche
   </button>
 
-  <div *ngIf="showForm">
+  <div *ngIf="showForm" class="card">
     <h4>Nouvelle tâche</h4>
     <form (ngSubmit)="addTask()">
-      <div>
-        <input [(ngModel)]="newTask.title" name="title" placeholder="Titre" required />
+      <div class="mb-3">
+        <input [(ngModel)]="newTask.title" name="title" class="form-control" placeholder="Titre" required />
       </div>
-      <div>
-        <input [(ngModel)]="newTask.description" name="description" placeholder="Description" required />
+      <div class="mb-3">
+        <input [(ngModel)]="newTask.description" name="description" class="form-control" placeholder="Description" required />
       </div>
-      <button type="submit">Ajouter</button>
+      <button type="submit" class="btn btn-success">Ajouter</button>
     </form>
   </div>
 
-  <div>
-    <table>
+  <div class="card">
+    <table class="table">
       <thead>
       <tr>
         <th>Titre</th>
@@ -115,31 +32,31 @@
         <td>{{ task.description }}</td>
         <td>
             <span [ngClass]="{
-              'completed': task.status === 'COMPLETED',
-              'in-progress': task.status !== 'COMPLETED'
+              'badge badge-success': task.status === 'COMPLETED',
+              'badge badge-warning': task.status !== 'COMPLETED'
             }">{{ task.status }}</span>
         </td>
         <td>
-          <button (click)="markAsCompleted(task.id!)" *ngIf="task.status !== 'COMPLETED'">Terminer</button>
-          <button (click)="editTask(task)">Modifier</button>
-          <button (click)="deleteTask(task.id!)">Supprimer</button>
+          <button class="btn btn-warning" (click)="markAsCompleted(task.id!)" *ngIf="task.status !== 'COMPLETED'">Terminer</button>
+          <button class="btn btn-info" (click)="editTask(task)">Modifier</button>
+          <button class="btn btn-danger" (click)="deleteTask(task.id!)">Supprimer</button>
         </td>
       </tr>
       </tbody>
     </table>
   </div>
 
-  <div *ngIf="selectedTask">
+  <div *ngIf="selectedTask" class="card">
     <h4>Modifier la tâche</h4>
     <form (ngSubmit)="updateTask(selectedTask)">
-      <div>
-        <input [(ngModel)]="selectedTask.title" name="title" placeholder="Titre" required />
+      <div class="mb-3">
+        <input [(ngModel)]="selectedTask.title" name="title" class="form-control" placeholder="Titre" required />
       </div>
-      <div>
-        <input [(ngModel)]="selectedTask.description" name="description" placeholder="Description" required />
+      <div class="mb-3">
+        <input [(ngModel)]="selectedTask.description" name="description" class="form-control" placeholder="Description" required />
       </div>
-      <button type="submit">Enregistrer</button>
-      <button type="button" (click)="selectedTask = null">Annuler</button>
+      <button type="submit" class="btn btn-success">Enregistrer</button>
+      <button type="button" class="btn btn-secondary" (click)="selectedTask = null">Annuler</button>
     </form>
   </div>
 </div>
