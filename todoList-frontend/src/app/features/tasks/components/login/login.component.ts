@@ -91,10 +91,10 @@ export class LoginComponent {
 
               if (role === 'USER') {
                 console.log('Redirecting to user tasks...');
-                this.router.navigate(['/task-list']);
+                this.router.navigate(['/dashboard/task-list']);
               } else if (role === 'ADMIN') {
                 console.log('Redirecting to admin tasks...');
-                this.router.navigate(['/task-list']);
+                this.router.navigate(['/dashboard/task-list']);
               } else {
                 this.errorMessage = 'Role inconnu : ' + role;
                 console.log('Unknown role:', role);
