@@ -6,6 +6,7 @@ import com.ToDoList.exception.TaskNotFoundException;
 import com.ToDoList.mapper.TaskMapper;
 import com.ToDoList.model.Task;
 import com.ToDoList.repository.TaskRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,12 +51,14 @@ public class TaskService {
         return TaskMapper.toDto(task);
     }
 
+    @Transactional
     public void deleteTask(UUID id) {
         if (!taskRepository.existsById(id)) {
             throw new TaskNotFoundException(id);
         }
         taskRepository.deleteById(id);
     }
+
 
     public TaskDto markTaskAsCompleted(UUID id) {
         Task task = taskRepository.findById(id)

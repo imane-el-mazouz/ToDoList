@@ -84,8 +84,7 @@ export class LoginComponent {
           if (response && response.user) {
             console.log('User object:', response.user);
 
-            // Si le rôle est dans user, assure-toi qu'il est correctement extrait
-            const role = response.user.role; // ou une autre clé si nécessaire
+            const role = response.user.role;
             if (role) {
               this.authService.setToken(response.accessToken);
               console.log('Token set:', response.accessToken);

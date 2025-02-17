@@ -38,7 +38,7 @@ import { routes } from './app.routes';
       multi: true,
     },
   ],
-  bootstrap: [], // Utilisez AppComponent comme point d'entrée
+  bootstrap: [],
 })
 export class AppModule {
   constructor() {

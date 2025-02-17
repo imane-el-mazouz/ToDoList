@@ -4,8 +4,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AuthService} from "../../services/auth_service/auth-service.service";
-// import {FooterComponent} from "../shared/footer/footer.component";
-// import {NavBarComponent} from "../shared/nav-bar/nav-bar.component";
+
 
 
 @Component({

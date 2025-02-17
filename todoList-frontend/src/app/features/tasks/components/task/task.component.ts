@@ -79,7 +79,7 @@ export class TaskComponent implements OnInit {///
   }
 
   editTask(task: Task): void {
-    this.selectedTask = { ...task }; // Copier la tâche sélectionnée pour modification
+    this.selectedTask = { ...task };
   }
 
   updateTask(selectedTask: Task): void {
@@ -88,7 +88,7 @@ export class TaskComponent implements OnInit {///
         next: (updatedTask) => {
           const taskIndex = this.tasks.findIndex((t) => t.id === updatedTask.id);
           if (taskIndex !== -1) this.tasks[taskIndex] = updatedTask;
-          this.selectedTask = null; // Réinitialiser la tâche sélectionnée
+          this.selectedTask = null;
         },
         error: (err) => console.error('Erreur lors de la modification de la tâche :', err),
       });
