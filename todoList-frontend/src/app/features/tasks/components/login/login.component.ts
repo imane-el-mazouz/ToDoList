@@ -16,7 +16,7 @@ import {AuthService} from "../../services/auth_service/auth-service.service";
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    HttpClientModule
+    HttpClientModule,
     // DividerModule,
     // ButtonDirective,
     // NavBarComponent,
@@ -40,30 +40,80 @@ export class LoginComponent {
     });
   }
 
+  // login(): void {
+  //   const { email, password } = this.loginForm.value;
+  //
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+  //
+  //   this.http.post<{ accessToken: string, person: { role: string } }>('http://localhost:8085/api/auth/login', { email, password })
+  //     .subscribe(
+  //       response => {
+  //         this.authService.setToken(response.accessToken);
+  //
+  //         if (response.person.role === 'USER') {
+  //           this.router.navigate(['/tasks']);
+  //         } else if (response.person.role === 'ADMIN') {
+  //           this.router.navigate(['/tasks']);
+  //         }else {
+  //           this.errorMessage = 'role undefined: ' + response.person.role;
+  //         }
+  //       },
+  //       error => {
+  //         console.error('Error during login', error);
+  //         this.errorMessage = 'Login failed. Please check your credentials and try again.';
+  //       }
+  //     );
+  // }
   login(): void {
     const { email, password } = this.loginForm.value;
 
     if (this.loginForm.invalid) {
+      console.log('Form is invalid');
       return;
     }
 
-    this.http.post<{ accessToken: string, person: { role: string } }>('http://localhost:8085/api/auth/login', { email, password })
+    console.log('Login attempt with:', email, password);
+
+    this.http.post<{ accessToken: string, user: any }>('http://localhost:8085/api/auth/login', { email, password })
       .subscribe(
         response => {
-          this.authService.setToken(response.accessToken);
+          console.log('Login response:', response);
 
-          if (response.person.role === 'USER') {
-            this.router.navigate(['/tasks']);
-          } else if (response.person.role === 'ADMIN') {
-            this.router.navigate(['/tasks']);
-          }else {
-            this.errorMessage = 'role undefined: ' + response.person.role;
+          if (response && response.user) {
+            console.log('User object:', response.user);
+
+            // Si le rôle est dans user, assure-toi qu'il est correctement extrait
+            const role = response.user.role; // ou une autre clé si nécessaire
+            if (role) {
+              this.authService.setToken(response.accessToken);
+              console.log('Token set:', response.accessToken);
+
+              if (role === 'USER') {
+                console.log('Redirecting to user tasks...');
+                this.router.navigate(['/task-list']);
+              } else if (role === 'ADMIN') {
+                console.log('Redirecting to admin tasks...');
+                this.router.navigate(['/task-list']);
+              } else {
+                this.errorMessage = 'Role inconnu : ' + role;
+                console.log('Unknown role:', role);
+              }
+            } else {
+              this.errorMessage = 'Role absent dans la réponse';
+            }
+          } else {
+            this.errorMessage = 'Erreur de rôle, réponse incorrecte';
           }
         },
         error => {
           console.error('Error during login', error);
-          this.errorMessage = 'Login failed. Please check your credentials and try again.';
+          this.errorMessage = 'Échec de la connexion. Veuillez vérifier vos identifiants et réessayer.';
         }
       );
   }
+
+
+
 }

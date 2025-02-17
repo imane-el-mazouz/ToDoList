@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
-import {Task} from "../../models/task";
-import {TaskService} from "../../services/task.service";
-import {FormsModule} from "@angular/forms";
-import {NgForOf, NgIf} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
+import { Task } from "../../models/task";
+import { TaskService } from "../../services/task.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import {RouterLink} from "@angular/router"; // Import HttpClientModule
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
   imports: [
     FormsModule,
-    NgForOf,
-    NgIf,
+    CommonModule,
+    ReactiveFormsModule,
+    RouterLink,
+    CommonModule,
+  HttpClientModule
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
@@ -64,5 +68,4 @@ export class TaskListComponent {
       }
     });
   }
-
 }

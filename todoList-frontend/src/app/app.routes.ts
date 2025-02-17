@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import {TaskListComponent} from "./features/tasks/components/task-list/task-list.component";
 import {LoginComponent} from "./features/tasks/components/login/login.component";
 import {SignupComponent} from "./features/tasks/components/singup/singup.component";
+import {TaskComponent} from "./features/tasks/components/task/task.component";
 
 
 export const routes: Routes = [
@@ -12,12 +13,9 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path : 'signup' , component: SignupComponent},
+  { path : 'tasks' , component: TaskListComponent},
+  { path : 'task-list' , component: TaskComponent},
 
-  {
-    path: 'tasks',
-    component: TaskListComponent,
-    // canActivate: []
-  },
   {
     path: '**',
     redirectTo: '/login'

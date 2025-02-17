@@ -24,6 +24,7 @@ export class GuardService implements CanActivate {
     const userRole = this.authService.getPersonRole();
 
     if (userRole && userRole === expectedRole) {
+
       return true;
     } else {
       this.router.navigate(['access-denied']);

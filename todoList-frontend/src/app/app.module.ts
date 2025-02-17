@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
-import {BrowserModule, provideClientHydration} from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgForOf, NgIf } from '@angular/common';
+
 import { AppComponent } from './app.component';
-
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import {RouterModule} from "@angular/router";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AuthInterceptor} from "./features/tasks/services/auth_interceptor/auth-interceptor-service.service";
-import {routes} from "./app.routes";
-
+import { TaskComponent } from './features/tasks/components/task/task.component';
+import { TaskListComponent } from './features/tasks/components/task-list/task-list.component';
+import { AuthInterceptor } from './features/tasks/services/auth_interceptor/auth-interceptor-service.service';
+import { TaskService } from './features/tasks/services/task.service';
+import { routes } from './app.routes';
 
 @NgModule({
   declarations: [
@@ -19,17 +22,26 @@ import {routes} from "./app.routes";
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    AppComponent
+    NgForOf,
+    NgIf,
+    AppComponent,
+    TaskListComponent,
+    FormsModule
   ],
   providers: [
+    TaskService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
-    provideClientHydration()
   ],
-  bootstrap: []
+  bootstrap: [], // Utilisez AppComponent comme point d'entrée
 })
-export class AppModule { }
+export class AppModule {
+  constructor() {
+    console.log('AppModule loaded');
+  }
+}

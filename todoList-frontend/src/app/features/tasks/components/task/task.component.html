@@ -1,0 +1,33 @@
+<div class="task-list">
+  <form (ngSubmit)="addTask()">
+    <input [(ngModel)]="newTask.title" name="title" placeholder="Titre" required />
+    <input [(ngModel)]="newTask.description" name="description" placeholder="Description" required />
+    <button type="submit">Ajouter la tâche</button>
+  </form>
+
+  <ul>
+    <li *ngFor="let task of tasks">
+      <div>
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <span>{{ task.status }}</span>
+        <button (click)="markAsCompleted(task.id!)" *ngIf="task.status !== 'COMPLETED'">
+          Marquer comme terminé
+        </button>
+        <button (click)="deleteTask(task.id!)">Supprimer</button>
+        <button (click)="editTask(task)">Modifier</button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Formulaire de modification -->
+  <div *ngIf="selectedTask">
+    <h3>Modifier la tâche</h3>
+    <form (ngSubmit)="updateTask(selectedTask)">
+      <input [(ngModel)]="selectedTask.title" name="title" placeholder="Titre" required />
+      <input [(ngModel)]="selectedTask.description" name="description" placeholder="Description" required />
+      <button type="submit">Enregistrer</button>
+      <button type="button" (click)="selectedTask = null">Annuler</button>
+    </form>
+  </div>
+</div>
