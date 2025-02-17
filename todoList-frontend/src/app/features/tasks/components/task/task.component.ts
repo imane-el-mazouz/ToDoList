@@ -26,7 +26,7 @@ export class TaskComponent implements OnInit {///
   selectedTask: Task | null = null;
 
   private apiUrl = 'http://localhost:8085/api/tasks';
-
+  showForm: boolean = false;
   constructor(private http: HttpClient) {
     console.log('HttpClient in TaskComponent:', this.http);
   }
@@ -69,7 +69,7 @@ export class TaskComponent implements OnInit {///
   }
 
   markAsCompleted(id: number): void {
-    this.http.patch<Task>(`${this.apiUrl}/${id}/complete`, {}, { headers: this.getHeaders() }).subscribe({
+    this.http.put<Task>(`${this.apiUrl}/${id}/complete`, {}, { headers: this.getHeaders() }).subscribe({
       next: (updatedTask) => {
         const taskIndex = this.tasks.findIndex((task) => task.id === updatedTask.id);
         if (taskIndex !== -1) this.tasks[taskIndex] = updatedTask;
